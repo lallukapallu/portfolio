@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lallu Wa Pallu - Curriculum Vitae</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+        }
+        
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #667eea;
+        }
+        
+        .section-title {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #667eea;
+        }
+        
+        .skill-badge {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            margin: 5px;
+            display: inline-block;
+            font-size: 0.9rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-badge:hover {
+            transform: translateY(-2px);
+        }
+        
+        .card {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-info {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .hobby-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- React and ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Babel for JSX transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const CVWebsite = () => {
+            const [visibleSections, setVisibleSections] = useState(new Set());
+
+            useEffect(() => {
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                setVisibleSections(prev => new Set([...prev, entry.target.id]));
+                            }
+                        });
+                    },
+                    { threshold: 0.1 }
+                );
+
+                document.querySelectorAll('.fade-in').forEach(el => {
+                    observer.observe(el);
+                });
+
+                return () => observer.disconnect();
+            }, []);
+
+            const skills = [
+                "Good Communication",
+                "Teamwork Abilities", 
+                "MS Word",
+                "MS Excel",
+                "MS PowerPoint",
+                "Fast Learner",
+                "Adaptable",
+                "Nepali (Fluent)",
+                "English (Fluent)",
+                "Time Management",
+                "Organizational Skills"
+            ];
+
+            const hobbies = [
+                { icon: "fas fa-book", text: "Reading books" },
+                { icon: "fas fa-music", text: "Listening to music" },
+                { icon: "fas fa-map-marked-alt", text: "Exploring new places" },
+                { icon: "fas fa-video", text: "Watching educational videos" }
+            ];
+
+            return (
+                <div>
+                    {/* Hero Section */}
+                    <section className="hero-section text-center">
+                        <div className="container">
+                            <div className="row align-items-center">
+                                <div className="col-lg-4 mb-4 mb-lg-0">
+                                    <div className="profile-img mx-auto">
+                                        <i className="fas fa-user"></i>
+                                    </div>
+                                </div>
+                                <div className="col-lg-8">
+                                    <h1 className="display-4 fw-bold mb-3">Lallu Wa Pallu</h1>
+                                    <p className="lead mb-4">Motivated High School Graduate | Age: 19</p>
+                                    <div className="contact-info">
+                                        <div className="row">
+                                            <div className="col-md-6 mb-2">
+                                                <i className="fas fa-map-marker-alt me-2"></i>
+                                                Pokhara, Nepal
+                                            </div>
+                                            <div className="col-md-6 mb-2">
+                                                <i className="fas fa-phone me-2"></i>
+                                                [Add your phone number]
+                                            </div>
+                                            <div className="col-12">
+                                                <i className="fas fa-envelope me-2"></i>
+                                                [Add your email address]
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Objective Section */}
+                    <section className="py-5">
+                        <div className="container">
+                            <div className={`fade-in ${visibleSections.has('objective') ? 'visible' : ''}`} id="objective">
+                                <h2 className="section-title">Objective</h2>
+                                <div className="card">
+                                    <div className="card-body">
+                                        <p className="card-text fs-5">
+                                            A motivated and enthusiastic recent high school graduate seeking opportunities to gain experience, 
+                                            develop skills, and contribute to a dynamic team. Eager to learn and grow professionally in a 
+                                            challenging and supportive environment.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Education Section */}
+                    <section className="py-5 bg-light">
+                        <div className="container">
+                            <div className={`fade-in ${visibleSections.has('education') ? 'visible' : ''}`} id="education">
+                                <h2 className="section-title">Education</h2>
+                                <div className="card">
+                                    <div className="card-body">
+                                        <h4 className="card-title text-primary">
+                                            <i className="fas fa-graduation-cap me-2"></i>
+                                            High School Certificate
+                                        </h4>
+                                        <h6 className="card-subtitle mb-2 text-muted">[Name of School], Pokhara, Nepal</h6>
+                                        <div className="row mt-3">
+                                            <div className="col-md-4">
+                                                <strong>Graduated:</strong> [Year you graduated, e.g., 2025]
+                                            </div>
+                                            <div className="col-md-4">
+                                                <strong>Major Subjects:</strong> [Science / Management / Humanities]
+                                            </div>
+                                            <div className="col-md-4">
+                                                <strong>GPA / Percentage:</strong> [Add if applicable]
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Skills Section */}
+                    <section className="py-5">
+                        <div className="container">
+                            <div className={`fade-in ${visibleSections.has('skills') ? 'visible' : ''}`} id="skills">
+                                <h2 className="section-title">Skills</h2>
+                                <div className="text-center">
+                                    {skills.map((skill, index) => (
+                                        <span key={index} className="skill-badge">
+                                            {skill}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Extracurricular Activities */}
+                    <section className="py-5 bg-light">
+                        <div className="container">
+                            <div className={`fade-in ${visibleSections.has('activities') ? 'visible' : ''}`} id="activities">
+                                <h2 className="section-title">Extracurricular Activities</h2>
+                                <div className="row">
+                                    <div className="col-md-4 mb-3">
+                                        <div className="card h-100">
+                                            <div className="card-body text-center">
+                                                <i className="fas fa-theater-masks fa-3x text-primary mb-3"></i>
+                                                <h5 className="card-title">Cultural Programs</h5>
+                                                <p className="card-text">Participated in school cultural programs</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-4 mb-3">
+                                        <div className="card h-100">
+                                            <div className="card-body text-center">
+                                                <i className="fas fa-running fa-3x text-primary mb-3"></i>
+                                                <h5 className="card-title">Sports Team</h5>
+                                                <p className="card-text">Member of school sports team [or any club]</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-4 mb-3">
+                                        <div className="card h-100">
+                                            <div className="card-body text-center">
+                                                <i className="fas fa-hands-helping fa-3x text-primary mb-3"></i>
+                                                <h5 className="card-title">Volunteer Work</h5>
+                                                <p className="card-text">Volunteer at [mention if you've volunteered anywhere]</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Hobbies and Interests */}
+                    <section className="py-5">
+                        <div className="container">
+                            <div className={`fade-in ${visibleSections.has('hobbies') ? 'visible' : ''}`} id="hobbies">
+                                <h2 className="section-title">Hobbies & Interests</h2>
+                                <div className="row">
+                                    {hobbies.map((hobby, index) => (
+                                        <div key={index} className="col-md-6 mb-3">
+                                            <div className="hobby-item">
+                                                <i className={`${hobby.icon} fa-2x text-primary me-3`}></i>
+                                                <span className="fs-5">{hobby.text}</span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Footer */}
+                    <footer className="bg-dark text-white text-center py-4">
+                        <div className="container">
+                            <p className="mb-0">© 2025 Lallu Wa Pallu. Ready to contribute and grow professionally.</p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<CVWebsite />, document.getElementById('root'));
+    </script>
+</body>
+</html>
